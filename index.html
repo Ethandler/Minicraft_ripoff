@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MiniCraft - Debug Mode</title>
     <link rel="stylesheet" href="style.css">
-    <script src="nipplejs.min.js"></script> <!-- Load joystick first -->
+
+    <!-- ✅ Add Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- ✅ Add nipplejs for joystick -->
+    <script src="nipplejs.min.js"></script>
 </head>
 <body>
     <div id="game-container">
@@ -28,6 +33,7 @@
         <button id="menu-toggle">☰</button>
     </div>
 
-    <script src="game.js"></script> <!-- Load game after joystick -->
+    <!-- ✅ Ensure this is after Three.js and nipplejs -->
+    <script src="game.js"></script>
 </body>
 </html>
