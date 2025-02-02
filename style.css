@@ -1,0 +1,79 @@
+/* Reset browser defaults */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Game Container */
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #87ceeb; /* Sky blue background */
+}
+
+/* Game Canvas */
+#gameCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Joystick Container */
+#joystick-container {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 150px;
+    height: 150px;
+    z-index: 10;
+}
+
+/* Touch Zone */
+#touch-zone {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+}
+
+/* In-Game Menu */
+#menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    display: none; /* Hidden by default */
+    z-index: 20;
+}
+
+#menu-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 15;
+    background: #333;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#sensitivity-slider {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Hide Scrollbars */
+body, html {
+    overflow: hidden;
+    touch-action: none; /* Prevent double-tap zoom */
+}
