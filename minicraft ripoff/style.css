@@ -72,6 +72,15 @@
     margin-top: 10px;
 }
 
+/* Prevent long-press text selection and highlighting */
+* {
+    -webkit-user-select: none; /* Disable selection in Safari */
+    -moz-user-select: none;    /* Disable selection in Firefox */
+    -ms-user-select: none;     /* Disable selection in IE/Edge */
+    user-select: none;         /* Disable selection for all browsers */
+    -webkit-touch-callout: none; /* Disable long-press context menu in iOS */
+}
+
 /* Hide Scrollbars */
 body, html {
     overflow: hidden;
