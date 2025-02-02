@@ -3,6 +3,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
 }
 
 /* Game Container */
@@ -11,7 +16,7 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background: #87ceeb; /* Sky blue background */
+    background: #87ceeb;
 }
 
 /* Game Canvas */
@@ -28,7 +33,10 @@
     left: 20px;
     width: 150px;
     height: 150px;
-    z-index: 10;
+    z-index: 1000;
+    pointer-events: auto;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
 }
 
 /* Touch Zone */
@@ -50,7 +58,7 @@
     color: white;
     padding: 15px;
     border-radius: 8px;
-    display: none; /* Hidden by default */
+    display: none;
     z-index: 20;
 }
 
@@ -72,17 +80,8 @@
     margin-top: 10px;
 }
 
-/* Prevent long-press text selection and highlighting */
-* {
-    -webkit-user-select: none; /* Disable selection in Safari */
-    -moz-user-select: none;    /* Disable selection in Firefox */
-    -ms-user-select: none;     /* Disable selection in IE/Edge */
-    user-select: none;         /* Disable selection for all browsers */
-    -webkit-touch-callout: none; /* Disable long-press context menu in iOS */
-}
-
 /* Hide Scrollbars */
 body, html {
     overflow: hidden;
-    touch-action: none; /* Prevent double-tap zoom */
+    touch-action: none;
 }

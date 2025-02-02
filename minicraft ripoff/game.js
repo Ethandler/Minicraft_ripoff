@@ -5,7 +5,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x87ceeb); // Sky blue
+scene.background = new THREE.Color(0x87ceeb);
 
 // ----- 🧍 Player Setup -----
 const player = new THREE.Object3D();
@@ -17,7 +17,7 @@ camera.position.set(0, 1.6, 0);
 player.add(camera);
 
 // ----- 💡 Lighting -----
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.4); 
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
 scene.add(ambientLight);
 
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
@@ -39,7 +39,7 @@ for (let x = -terrainSize / 2; x <= terrainSize / 2; x++) {
 
 // ----- 🕹️ Joystick Controls -----
 let movement = { angle: 0, speed: 0 };
-let lookSensitivity = 0.015; // Default sensitivity
+let lookSensitivity = 0.015;
 
 const joystick = nipplejs.create({
     zone: document.getElementById('joystick-container'),
@@ -47,6 +47,8 @@ const joystick = nipplejs.create({
     position: { left: '75px', bottom: '75px' },
     color: 'blue'
 });
+
+console.log('Joystick initialized:', joystick);
 
 joystick.on('move', (evt, data) => {
     movement.angle = data.angle.radian;
@@ -67,8 +69,8 @@ const touchZone = document.getElementById('touch-zone');
 touchZone.addEventListener('touchstart', (e) => {
     isSwiping = true;
     lastTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-    isTouching = true; 
-    heldTime = 0; 
+    isTouching = true;
+    heldTime = 0;
 });
 
 touchZone.addEventListener('touchmove', (e) => {
@@ -88,7 +90,7 @@ touchZone.addEventListener('touchmove', (e) => {
 
 touchZone.addEventListener('touchend', (e) => {
     if (heldTime < 300) {
-        placeBlock(e.changedTouches[0].clientX, e.changedTouches[0].clientY); 
+        placeBlock(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
     }
     isSwiping = false;
     isTouching = false;
@@ -120,7 +122,7 @@ function placeBlock(x, y) {
     if (intersects.length > 0) {
         const hit = intersects[0];
         const normal = hit.face.normal;
-        const position = hit.point.clone().add(normal).floor().addScalar(0.5);
+        const position = hit.object.position.clone().add(normal); // Adjusted for accuracy
 
         const block = new THREE.Mesh(
             new THREE.BoxGeometry(1, 1, 1),
@@ -189,7 +191,7 @@ function animate() {
 
     if (isTouching) {
         heldTime += delta;
-        if (heldTime >= 1000) {
+        if (heldTime >= 500) { // Reduced hold time to 0.5s
             deleteBlock();
             isTouching = false;
         }
@@ -198,29 +200,3 @@ function animate() {
     renderer.render(scene, camera);
 }
 animate();
-
-// ----- 📱 Responsive Design -----
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-});
-
-// ----- ⚙️ In-Game Menu -----
-const menu = document.getElementById('menu');
-const menuToggle = document.getElementById('menu-toggle');
-const sensitivitySlider = document.getElementById('sensitivity-slider');
-const sensitivityValue = document.getElementById('sensitivity-value');
-
-menuToggle.addEventListener('click', () => {
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-});
-
-document.getElementById('close-menu').addEventListener('click', () => {
-    menu.style.display = 'none';
-});
-
-sensitivitySlider.addEventListener('input', (e) => {
-    lookSensitivity = parseFloat(e.target.value);
-    sensitivityValue.textContent = lookSensitivity.toFixed(3);
-});
